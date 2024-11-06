@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:news_app_flutter/helpers/MediaHelper.dart';
 
 import '../models/news_article.dart';
+import '../widgets/element/DateTime/date_time_news.dart';
 
 class NewsDetailPage extends StatelessWidget {
   final NewArticle? news;
@@ -27,8 +28,14 @@ class NewsDetailPage extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Expanded( child: DateTimeWidgetNews(news.publishedAt)),
+              ],
+            ),
             const SizedBox(height: 16.0),
-            Text(news.description),
+            Text(news.content),
           ],
         ),
       ),

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:news_app_flutter/screens/news_page.dart';
 
 import 'blocs/news_bloc.dart';
-import 'models/news_article.dart';
 import 'repositories/news_repository.dart';
 import 'screens/news_detail_page.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: ".env");
   runApp(MyApp());
 }
 

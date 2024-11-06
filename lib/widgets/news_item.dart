@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
 
 import '../helpers/MediaHelper.dart';
+import '/widgets/element/DateTime/date_time_news.dart';
 
 class NewsItem extends StatelessWidget {
   final String title;
   final String description;
   final String imagenUrl;
+  final String content;
+  final String publishedAt;
   final VoidCallback onTap;
 
   const NewsItem({
     required this.title,
     required this.description,
+    required this.content,
     required this.imagenUrl,
+    required this.publishedAt,
     required this.onTap,
   });
 
-  @override
+ @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
@@ -37,7 +42,16 @@ class NewsItem extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                 const SizedBox(height: 8.0),
+                  const SizedBox(height: 8.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Expanded(
+                        child: DateTimeWidgetNews(publishedAt),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8.0),
                   Text(
                     description,
                     maxLines: 3,

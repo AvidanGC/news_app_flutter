@@ -1,18 +1,17 @@
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/news_article.dart';
 
 class NewsRepository {
-  final String baseUrl = 'https://newsapi.org/v2';  // URL base de la API
-  final String apiKey = '8119c35f08ff44e687059cdd745b5888'; 
+  final String baseUrl = dotenv.env['BASE_URL'] ?? '';
+  final String apiKeyNews = dotenv.env['API_KEY_NEWS'] ?? '';
 
 
   Future<List<NewArticle>> getNews({int page = 1}) async {
-    final url = Uri.parse('$baseUrl/top-headlines?country=us&page=$page&apiKey=$apiKey');
-    
+    final url = Uri.parse('$baseUrl/top-headlines?country=us&page=$page&apiKey=$apiKeyNews');
     final result = await http.get(url);
-    print("getNews_statusCode: ${result.statusCode}");
     if (result.statusCode == 200) {
       final data = jsonDecode(result.body);
       List<dynamic> articulosJson = data['articles'];

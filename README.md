@@ -37,7 +37,25 @@
    ```bash
    flutter pub get
 
-4. Corre la aplicación en un dispositivo o emulador:
+   ## Configuración de Variables de Entorno
+
+4. Este proyecto utiliza el paquete `flutter_dotenv` para gestionar las variables de entorno de manera segura. Las variables de entorno, como la clave de API y la URL base de la API, se almacenan en un archivo `.env`.
+
+### Pasos para configurar el archivo `.env`
+
+   1. Asegúrate de que el paquete `flutter_dotenv` esté instalado. Si no lo está, puedes instalarlo ejecutando:
+      ```bash
+      flutter pub add flutter_dotenv
+      
+   2. Crea un archivo .env en la raíz del proyecto (en el mismo nivel que el archivo pubspec.yaml).
+   
+   3. Dentro del archivo .env, define las variables necesarias. A continuación se muestra un ejemplo con las variables requeridas para la API de noticias:
+
+      API_KEY_NEWS=tu_clave_de_api_aqui [News API](https://newsapi.org/)
+      BASE_URL=https://newsapi.org/v2
+
+
+5. Corre la aplicación en un dispositivo o emulador:
     ```bash
     flutter run
 

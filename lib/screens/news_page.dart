@@ -48,21 +48,29 @@ class _NewsPageState extends State<NewsPage> {
           if (state is NewsLoading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is NewsLoaded) {
-            return ListView.builder(
-              controller: _scrollController, 
-              itemCount: state.news.length,
-              itemBuilder: (context, index) {
-                final news = state.news[index];
-                return NewsItem(
-                  title: news.title,
-                  description: news.description,
-                  imagenUrl: news.urlImagen,
-                  onTap: () {
-                    //Go page News Detail 
-                    Navigator.pushNamed( context, '/detail', arguments: news);
-                  },
-                );
+            return RefreshIndicator(
+              onRefresh: () async {
+                BlocProvider.of<NewsBloc>(context).add(FetchNews());
+                await Future.delayed(const Duration(seconds: 2));
               },
+              child: ListView.builder(
+                controller: _scrollController, 
+                itemCount: state.news.length,
+                itemBuilder: (context, index) {
+                  final news = state.news[index];
+                  return NewsItem(
+                    title: news.title,
+                    description: news.description,
+                    content: news.content,
+                    publishedAt: news.publishedAt,
+                    imagenUrl: news.urlImagen,
+                    onTap: () async {
+                      //Go page News Detail 
+                      Navigator.pushNamed( context, '/detail', arguments: news);
+                    },
+                  );
+                },
+              ),
             );
           } else if (state is NewsError) {
             return Center(child: Text('Error: ${state.msg}'));
